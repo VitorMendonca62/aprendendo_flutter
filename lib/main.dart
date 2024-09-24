@@ -1,5 +1,7 @@
+import 'package:aprendendo_flutter/routes/routes.dart';
 import 'package:aprendendo_flutter/screens/login.view.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 void main() {
   runApp(const MyApp());
@@ -8,13 +10,13 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Teste de ia',
-      home: LoginView(),
+    return GetMaterialApp(
+      title: 'FakeStoreApi',
+      home: const LoginView(),
       color: Colors.black,
+      getPages: Routes.routes,
     );
   }
 }

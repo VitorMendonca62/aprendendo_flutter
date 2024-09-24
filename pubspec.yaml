@@ -39,6 +39,7 @@ dependencies:
   validators: ^3.0.0
   dio: ^5.7.0
   json_annotation: ^4.9.0
+  shared_preferences: ^2.3.2
 
 dev_dependencies:
   flutter_test:

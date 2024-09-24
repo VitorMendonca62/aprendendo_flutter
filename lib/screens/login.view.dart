@@ -46,6 +46,16 @@ class _LoginView extends State<LoginView> {
                 key: _loginController.formKey,
                 child: Column(
                   children: [
+                    const Padding(
+                      padding: EdgeInsets.only(bottom: 20.0),
+                      child: Text(
+                        "FakeStoreAPI",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                     FormInput(
                       controller: _loginController.usernameController,
                       placeholder: "exemplo",
