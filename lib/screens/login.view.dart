@@ -1,5 +1,6 @@
 import 'package:aprendendo_flutter/components/form_input.component.dart';
 import 'package:aprendendo_flutter/controllers/login.controller.dart';
+import 'package:aprendendo_flutter/routes/routes.dart';
 import 'package:aprendendo_flutter/utils/types.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,15 +23,14 @@ class _LoginView extends State<LoginView> {
     super.initState();
     usernameNode = FocusNode();
     passwordNode = FocusNode();
-  }
 
-  @override
-  void dispose() {
-    _loginController.usernameController.dispose();
-    _loginController.passwordController.dispose();
-    usernameNode.dispose();
-    passwordNode.dispose();
-    super.dispose();
+    isLogged() async {
+      // if (await _loginController.isLogged()) {
+      //   Get.offNamed(Routes.home);
+      // }
+    }
+
+    isLogged();
   }
 
   @override
@@ -38,7 +38,7 @@ class _LoginView extends State<LoginView> {
     return SafeArea(
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.fromLTRB(48, 0, 48, 0),
+          padding: const EdgeInsets.fromLTRB(48, 16, 48, 16),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -58,6 +58,7 @@ class _LoginView extends State<LoginView> {
                     ),
                     FormInput(
                       controller: _loginController.usernameController,
+                      title: "Username",
                       placeholder: "exemplo",
                       inputType: InputTypes.username,
                       jumpToNextNode: true,
@@ -68,6 +69,7 @@ class _LoginView extends State<LoginView> {
                     ),
                     FormInput(
                       controller: _loginController.passwordController,
+                      title: "Senha",
                       placeholder: "********",
                       inputType: InputTypes.password,
                       jumpToNextNode: false,
@@ -92,7 +94,19 @@ class _LoginView extends State<LoginView> {
                     )
                   ],
                 ),
-              )
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0,),
+                child: InkWell(
+                  onTap: () => Get.offNamed(Routes.signup),
+                  child: const Text(
+                    "Não tem conta? Cadastra-se",
+                    style: TextStyle(
+                      fontSize: 15,
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

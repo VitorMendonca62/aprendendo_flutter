@@ -23,6 +23,20 @@ class UserService {
       return e.response;
     }
   }
+  Future createUser(dynamic body) async {
+    try {
+      String url = '$baseUrl/users';
+
+      dioo.Response response = await _dio.post(
+        url,
+        data: body,
+      );
+
+      return response;
+    } on dioo.DioException catch (e) {
+      return e.response;
+    }
+  }
 
   Future getAll() async {
     try {

@@ -34,7 +34,7 @@ IName _$INameFromJson(Map<String, dynamic> json) => IName(
     );
 
 Map<String, dynamic> _$INameToJson(IName instance) => <String, dynamic>{
-      "firstName": instance.firstname,
+      "firstname": instance.firstname,
       "lastname": instance.lastname,
     };
 

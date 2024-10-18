@@ -21,9 +21,16 @@ class LoginController extends GetxController {
 
   final UserService _userService = Get.put(UserService());
 
-  enableTimer() {
+  isLogged() async{
+    return await _userService.getSession() != null;
+  }
+
+  enableTimer(bool goToHome) {
     Timer(const Duration(milliseconds: 1000), () {
       _loading = false;
+      if (goToHome) {
+        Get.offNamed(Routes.home);
+      }
     });
   }
 
@@ -34,14 +41,14 @@ class LoginController extends GetxController {
       final String username = usernameController.text;
       if (username.length < 4) {
         Alert.warning(message: "Username inválido");
-        enableTimer();
+        enableTimer(false);
         return;
       }
 
       final String password = passwordController.text;
       if (password.length < 5) {
         Alert.warning(message: "Senha inválida");
-        enableTimer();
+        enableTimer(false);
         return;
       }
       final body = {
@@ -52,15 +59,16 @@ class LoginController extends GetxController {
 
       if (response.statusCode == 200) {
         final token = response.data["token"];
-        saveUser(token);
         Alert.sucess(message: "Login efetuado com sucesso");
-        Get.offNamed(Routes.home);
+        saveUser(token);
+        enableTimer(true);
+        return;
       } else if (response.statusCode == 401) {
         Alert.error(message: "Usuário ou senha estão incorretos.");
       } else {
         Alert.error(message: response.data);
       }
-      enableTimer();
+      enableTimer(false);
       return;
     }
     Alert.warning(message: "Espere o carregamento.");
